@@ -7,7 +7,7 @@ class Sent(db.Model):
     """ Record of a sent message """
     __tablename__ = 'sent_messages'
     id = db.Column(db.Integer, primary_key=True)
-    phone = db.Column(db.Integer)
+    phone = db.Column(db.String)
     date = db.Column(db.Date)
     message = db.Column(db.String)
     status = db.Column(db.String)

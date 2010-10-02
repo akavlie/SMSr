@@ -16,3 +16,15 @@ h1 {
     border: 1px solid #AACBE2;
 }
 
+#sent_messages {
+    border-collapse: collapse;
+    border: 1px solid #AACBE2;
+}
+
+    #sent_messages tr:first-child {
+        background: #CEE5F5;
+    }
+
+    #sent_messages th, #sent_messages td {
+        padding: 4px 20px;
+    }

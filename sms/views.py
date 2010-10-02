@@ -6,7 +6,7 @@ from tw_send import twilio_send
 
 @app.route('/')
 def index():
-    sent_messages = Sent.query.all()
+    sent_messages = Sent.query.order_by(Sent.id.desc()).all()
     return render_template('index.html', sent_messages=sent_messages)
 
 @app.route('/sms', methods=['POST'])
@@ -17,4 +17,4 @@ def sms():
     db.session.commit()
 
     flash('SMS sent to %s' % request.form['phone_number'])
-    return redirect(url_for('index'))
+    #return redirect(url_for('index'))

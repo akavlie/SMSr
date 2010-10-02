@@ -2,7 +2,19 @@
 
 {% block body %}
 
-<form action="/sms" method="post">
+<script type="text/javascript">
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    $(function() {
+        $("#sms_form").submit(function() {
+            $.post("/sms", $("#sms_form").serialize());
+        });
+        return false;
+    });
+
+</script>
+
+<form id="sms_form" action="">
     <p><label for="phone">Phone Number: </label>
         <input type="text" name="phone_number" /></p>
     <p><label for="phone_number">Message: </label>
@@ -10,9 +22,8 @@
     <input type="submit" value="Send" /></p>
 </form>
 
-<div id="sent_messages">
     {% if sent_messages %}
-    <table>
+    <table id="sent_messages">
         <tr>
             <th>Time</th>
             <th>Phone Number</th>
@@ -31,6 +42,5 @@
     {% else %}
     No messages yet!
     {% endif %}
-</div>
 
 {% endblock %}
