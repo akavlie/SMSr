@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<form action="/sms" method="post">
+    <p><label for="phone">Phone Number: </label>
+        <input type="text" name="phone_number" /></p>
+    <p><label for="phone_number">Message: </label>
+    <input type="text" name="message" />
+    <input type="submit" value="Send" /></p>
+</form>
+
+<div id="sent_messages">
+    {% if sent_messages %}
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Phone Number</th>
+            <th>Message</th>
+            <th>Status</th>
+        </tr>
+        {% for message in sent_messages %}
+        <tr>
+            <td>{{ message.date }}</td>
+            <td>{{ message.phone }}</td>
+            <td>{{ message.message }}</td>
+            <td>{{ message.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    No messages yet!
+    {% endif %}
+</div>
+
+{% endblock %}
