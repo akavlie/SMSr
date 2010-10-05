@@ -7,14 +7,11 @@
 
     $(function() {
         $("#sms_form").submit(function() {
-            //$.post("/sms", $("#sms_form").serialize());
-            //$("#sent_messages td").animate({top: '+=50'}, 'slow');
-            $("#sent_messages td").slideOut();
+            $.post("/sms", $("#sms_form").serialize(), 
+                function(data) {
+                   $('#status').html(data.status); 
+                }, 'json');
             return false;
-        }); 
-
-        $('#go').click(function() {
-            $("#play").animate({top: '+=50'}, 'slow');
         });
     });
 
@@ -28,15 +25,27 @@
     <input type="submit" value="Send" /></p>
 </form>
 
+<div id="test">
+    <p id="status">null</p>
+    <p id="phone">null</p>
+    <p id="message">null</p>
+</div>
+
     {% if sent_messages %}
+    <div id="sent_message_list">
+        <h2>Message History</h2>
         {% for message in sent_messages %}
         <div class="sent_message">
             <div class="status">{{ message.status }}</div>
-            <div class="phone">{{ message.phone }}</div>
-            <div class="time">{{ message.date }}</div>
-            <div class="message_text">{{ message.message }}</div>
+            <div class="sent_body">
+                <div class="phone">{{ message.phone }}</div>
+                <div class="time">{{ message.date }}</div>
+                <div class="clear"></div>
+                <div class="message_text"><p>{{ message.message }}</p></div>
+            </div>
         </div>
         {% endfor %}
+    </div>
     {% else %}
     No messages yet!
     {% endif %}

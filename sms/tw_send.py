@@ -10,6 +10,8 @@ def twilio_send(phone_number, message):
 
     account = twilio.Account(app.config['ACCOUNT_SID'],
                              app.config['ACCOUNT_TOKEN'])
-    account.request('/%s/Accounts/%s/SMS/Messages' % (app.config['API_VERSION'],
-                                                      app.config['ACCOUNT_SID']),
-                    'POST', data)
+    tw_response = account.request('/%s/Accounts/%s/SMS/Messages.json' % 
+                               (app.config['API_VERSION'], app.config['ACCOUNT_SID']),
+                               'POST', data)
+
+    return tw_response

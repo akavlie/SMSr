@@ -1,3 +1,5 @@
+import json
+
 from sms import app
 from flask import render_template, request, redirect, url_for, flash
 from model import db, Sent, Message
@@ -11,10 +13,16 @@ def index():
 
 @app.route('/sms', methods=['POST'])
 def sms():
-    twilio_send(request.form['phone_number'], request.form['message'])
-    sms = Sent(request.form['phone_number'], request.form['message'])
+    # Send to Twilio
+    tw_response = twilio_send(request.form['phone_number'], request.form['message'])
+
+    # Convert JSON from Twilio to Python dict
+    sms_data = json.loads(tw_response)
+    
+    # Commit to database
+    sms = Sent(sms_data['to'], sms_data['body'], sms_data['status'])
     db.session.add(sms)
     db.session.commit()
 
-    flash('SMS sent to %s' % request.form['phone_number'])
-    #return redirect(url_for('index'))
+    # flash('SMS sent to %s' % request.form['phone_number'])
+    return tw_response

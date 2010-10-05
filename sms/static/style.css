@@ -1,13 +1,23 @@
 body {
     font-family: sans-serif;
+    font-size: 16px;
 }
 
 #page {
     margin: 50px 200px;
 }
 
+.clear {
+    clear: both;
+}
+
 h1 {
-    font-size: 30pt;
+    font-size: 40px;
+}
+
+h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
 }
 
 .flash {
@@ -19,16 +29,31 @@ h1 {
 /* SENT MESSAGES */
 
 #sent_message_list {
+    width: 80%;
 }
 
 .sent_message {
     position: relative;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    height: 120px;
 }
     .sent_message .status {
+        padding: 5px;
+        border-bottom: 1px solid black;
     }
-    .sent_message .phone {
+    .sent_message .sent_body {
+        padding: 5px;
     }
-    .sent_message .time {
-    }
-    .sent_message .message_text {
-    }
+        .sent_message .phone {
+            float: left;
+            width: 300px;
+        }
+        .sent_message .time {
+            float: right;
+            text-align: right;
+            width: 200px;
+        }
+        .sent_message .message_text {
+            margin-top: 15px;
+        }

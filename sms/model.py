@@ -12,9 +12,10 @@ class Sent(db.Model):
     message = db.Column(db.String)
     status = db.Column(db.String)
 
-    def __init__(self, phone, message):
+    def __init__(self, phone, message, status):
         self.phone = phone
         self.message = message
+        self.status = status
 
 class Message(db.Model):
     """ Frequently used SMS messages """
