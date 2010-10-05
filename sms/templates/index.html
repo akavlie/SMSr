@@ -7,9 +7,15 @@
 
     $(function() {
         $("#sms_form").submit(function() {
-            $.post("/sms", $("#sms_form").serialize());
+            //$.post("/sms", $("#sms_form").serialize());
+            //$("#sent_messages td").animate({top: '+=50'}, 'slow');
+            $("#sent_messages td").slideOut();
+            return false;
+        }); 
+
+        $('#go').click(function() {
+            $("#play").animate({top: '+=50'}, 'slow');
         });
-        return false;
     });
 
 </script>
@@ -23,22 +29,14 @@
 </form>
 
     {% if sent_messages %}
-    <table id="sent_messages">
-        <tr>
-            <th>Time</th>
-            <th>Phone Number</th>
-            <th>Message</th>
-            <th>Status</th>
-        </tr>
         {% for message in sent_messages %}
-        <tr>
-            <td>{{ message.date }}</td>
-            <td>{{ message.phone }}</td>
-            <td>{{ message.message }}</td>
-            <td>{{ message.status }}</td>
-        </tr>
+        <div class="sent_message">
+            <div class="status">{{ message.status }}</div>
+            <div class="phone">{{ message.phone }}</div>
+            <div class="time">{{ message.date }}</div>
+            <div class="message_text">{{ message.message }}</div>
+        </div>
         {% endfor %}
-    </table>
     {% else %}
     No messages yet!
     {% endif %}

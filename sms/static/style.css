@@ -16,15 +16,19 @@ h1 {
     border: 1px solid #AACBE2;
 }
 
-#sent_messages {
-    border-collapse: collapse;
-    border: 1px solid #AACBE2;
+/* SENT MESSAGES */
+
+#sent_message_list {
 }
 
-    #sent_messages tr:first-child {
-        background: #CEE5F5;
+.sent_message {
+    position: relative;
+}
+    .sent_message .status {
     }
-
-    #sent_messages th, #sent_messages td {
-        padding: 4px 20px;
+    .sent_message .phone {
+    }
+    .sent_message .time {
+    }
+    .sent_message .message_text {
     }
