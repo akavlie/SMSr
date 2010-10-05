@@ -25,4 +25,4 @@ def sms():
     db.session.commit()
 
     # flash('SMS sent to %s' % request.form['phone_number'])
-    return tw_response
+    return render_template('sent_message.html', sms=sms_data)

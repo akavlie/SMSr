@@ -7,9 +7,8 @@ body {
     margin: 50px 200px;
 }
 
-.clear {
-    clear: both;
-}
+.clear {clear: both;}
+.hidden {display: none;}
 
 h1 {
     font-size: 40px;
