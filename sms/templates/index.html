@@ -2,26 +2,7 @@
 
 {% block body %}
 
-<script type="text/javascript">
-    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-
-    $(function() {
-        $('#test').click(function() {
-            $('.sent_message:first').slideToggle(1000);
-        });
-
-        $("#sms_form").submit(function() {
-            $.post("/sms", $("#sms_form").serialize(),
-                function(data) {
-                    $('#sent_message_list').prepend(data);
-                    $('.sent_message:first').fadeIn(1000);
-                });
-            return false;
-        });
-
-    });
-
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename='sms.js') }}"></script>
 
 <button id="test">Test!</button>
 
@@ -33,29 +14,20 @@
     <input type="submit" value="Send" /></p>
 </form>
 
-<div id="test">
-    <p id="status">null</p>
-    <p id="phone">null</p>
-    <p id="message">null</p>
-</div>
-
-    {% if sent_messages %}
-        <h2>Message History</h2>
-    <div id="sent_message_list">
-        {% for message in sent_messages %}
-        <div class="sent_message">
-            <div class="status">{{ message.status }}</div>
-            <div class="sent_body">
-                <div class="phone">{{ message.phone }}</div>
-                <div class="time">{{ message.date }}</div>
-                <div class="clear"></div>
-                <div class="message_text"><p>{{ message.message }}</p></div>
-            </div>
+<div id="sent_message_list">
+    <h2>Message History</h2>
+    {% for message in sent_messages %}
+    <div class="sent_message">
+        <div class="status">{{ message.status }}</div>
+        <div class="sent_body">
+            <div class="phone">{{ message.phone }}</div>
+            <div class="time">{{ message.date }}</div>
+            <div class="clear"></div>
+            <div class="message_text"><p>{{ message.message }}</p></div>
+            <div class="hidden">{{ message.sid }}</div>
         </div>
-        {% endfor %}
     </div>
-    {% else %}
-    No messages yet!
-    {% endif %}
+    {% endfor %}
+</div>
 
 {% endblock %}

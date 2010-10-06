@@ -8,7 +8,7 @@ body {
 }
 
 .clear {clear: both;}
-.hidden {display: none;}
+.hidden {display: none; opacity: 0;}
 
 h1 {
     font-size: 40px;
