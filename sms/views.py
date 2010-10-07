@@ -5,7 +5,7 @@ from flask import render_template, request, redirect, url_for, flash
 from model import db, User, SentMessage, FrequentText
 from datetime import datetime
 
-from tw_send import twilio_send
+from tw_send import twilio_send, twilio_update
 
 @app.route('/')
 def index():
@@ -32,17 +32,17 @@ def sms():
     # flash('SMS sent to %s' % request.form['phone_number'])
     return render_template('sent_message.html', sms=sms_data)
 
-@app.route('/sms/update/<sid>', methods=['POST'])
+@app.route('/sms/update/<sid>')
 def sms_update(sid):
     """Update an SMS based on query from Twilio. """
 
     tw_response = twilio_update(sid)
     sms_data = json.loads(tw_response)
 
-    sms = SentMessage.query.filter_by('sid=%s' % sid).one()
-    sms.status = sms_data.status
+    sms = SentMessage.query.filter_by(sid=sid).one()
+    sms.status = sms_data['status']
     db.session.commit()
 
-    return sms_data.status
+    return sms.status
 
 
