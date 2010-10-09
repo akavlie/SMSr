@@ -2,6 +2,12 @@ var status_checker = 0;
 
 $(function() {
 
+  $('#test').click(function() {
+      //$(".sent_message").css("background-color", "#FFFF9C")
+       // .animate({ backgroundColor: "#FFFFFF", color: '#ffffff'}, 1500);
+       $('.sent_message, .status').effect('highlight', {color: '#ffffff'}, 1500);
+
+    });
   // SMS SUBMISION
   // -------------
   $("#sms_form").submit(function() {
@@ -18,7 +24,7 @@ $(function() {
           .removeClass('new');
         // Check status of new messages at set interval
         if(status_checker==0) {
-            status_checker = setInterval('checkStatus()', 3000);
+            status_checker = setInterval('checkStatus()', 5000);
         }
     });
     return false;
@@ -39,17 +45,25 @@ $(function() {
 function checkStatus() {
   // Check every message on the page with status "queued" or "sending" --
   // Twilio's status possibilities for unsent messsages
-  $('.queued, .sending').each(function(i) {
+  $($('.queued, .sending').get().reverse()).each(function() {
     var sid = $(this).find('.sid').html();
+    var status = $(this).children('.status').html();
     // Update status based on check with twilio
-    $(this).children('.status').load($SCRIPT_ROOT + '/sms/update/' + sid, function(status) {
+    $(this).children('.status').load($SCRIPT_ROOT + '/sms/update/' + sid, function(data) {
       // Add class based on current status; remove former status class 
-      $('.queued, .sending').addClass(status).removeClass('queued sending');
+      if(data != status) {
+        $(this).parent()
+          .fadeOut()
+          .removeClass('queued sending')
+          .addClass(data)
+          .fadeIn();
+      }
+        //.children('.sent_message, .status').effect('highlight', {color: '#ffffff'}, 3000);
     });
   });
 
   // Stop checking message status if there aren't any left
-  if($('.queued, .sending').length > 0) {
+  if($('.queued, .sending').length == 0) {
     clearInterval(status_checker);
     status_checker = 0;
   }

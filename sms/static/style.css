@@ -4,7 +4,7 @@ body {
 }
 
 #page {
-    margin: 50px 200px;
+    margin: 50px 300px;
 }
 
 h1 {
@@ -24,6 +24,24 @@ input.placeholder {
 .clear {clear: both;}
 .hidden {display: none;}
 
+
+/* ROUNDED CORNERS */
+
+.rounded {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.rounded_top {
+    -moz-border-radius: 8px 8px 0px 0px;
+    -webkit-border-radius: 8px 8px 0px 0px;
+    -khtml-border-radius: 8px 8px 0px 0px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+
 .flash {
     background: #CEE5F5;
     padding: 0.5em;
@@ -32,37 +50,45 @@ input.placeholder {
 
 /* SMS BOX */
 #sms_box {
+    background-color: #EEEEEE;
     border: 1px solid black;
+    padding: 10px;
 }
 
 #recipients {
+    background-color: white;
+    border: 1px solid black;
+}
+    #recipients td {
+        padding: 2px 50px 2px 0px;
+    }
+
+
+/* SMS FORM */
+
+#sms_form input {
+    font-size: 20px;
 }
 
 
 /* SENT MESSAGES */
 
 #sent_message_list {
-    width: 80%;
+    width: 100%;
 }
 
 .sent_message {
     position: relative;
     margin-bottom: 10px;
-    border: 1px solid black;
     height: 120px;
-
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
-
 }
     .sent_message .status {
-        padding: 5px;
-        border-bottom: 1px solid black;
+        padding: 8px;
+        color: white;
+        font-weight: bold;
     }
     .sent_message .sent_body {
-        padding: 5px;
+        padding: 8px;
     }
         .sent_message .phone {
             float: left;
@@ -84,12 +110,16 @@ input.placeholder {
         }
 
         .failed {
-            border: 2px solid #CC0000;
             background-color: #e7c5c5;
         }
+            .failed .status {
+                background-color: #CC0000; /* red */
+            }
 
         .sent {
-            border: 2px solid #008C00;
             background-color: #bfe3bf; /* pale green */
         }
+            .sent .status {
+                background-color: #008C00; /* green */
+            }
 
