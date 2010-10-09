@@ -14,6 +14,12 @@ class User(db.Model):
                                     order_by='SentMessage.date',
                                     backref='user') 
 
+    def __init__(self, name, phone):
+        first_name, last_name = ' '.split(name)
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone = phone
+
 class SentMessage(db.Model):
     """Record of a sent SMS message """
     __tablename__ = 'sent_messages'

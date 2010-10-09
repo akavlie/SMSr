@@ -9,8 +9,10 @@ from tw_send import twilio_send, twilio_update
 
 @app.route('/')
 def index():
-    sent_messages = SentMessage.query.order_by(SentMessage.id.desc()).all()
-    return render_template('index.html', sent_messages=sent_messages)
+    sent_messages = SentMessage.query.order_by(SentMessage.id.desc())[0:10]
+    users = User.query.all()
+    return render_template('index.html', sent_messages=sent_messages,
+                           users=users)
 
 @app.route('/sms', methods=['POST'])
 def sms():
@@ -45,4 +47,15 @@ def sms_update(sid):
 
     return sms.status
 
+@app.route('/user')
+def user_add():
+    """Add a user to the DB. """
+
+    u = User(request.form['user_name'], request.form['user_phone'])
+    db.session.add(u)
+    db.session.commit()
+
+    users = User.query.all()
+
+    return render_template('user.html', users=users)
 

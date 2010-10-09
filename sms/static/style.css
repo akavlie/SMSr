@@ -7,9 +7,6 @@ body {
     margin: 50px 200px;
 }
 
-.clear {clear: both;}
-.hidden {display: none; opacity: 0;}
-
 h1 {
     font-size: 40px;
 }
@@ -19,11 +16,28 @@ h2 {
     border-bottom: 1px solid gray;
 }
 
+input.placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.clear {clear: both;}
+.hidden {display: none;}
+
 .flash {
     background: #CEE5F5;
     padding: 0.5em;
     border: 1px solid #AACBE2;
 }
+
+/* SMS BOX */
+#sms_box {
+    border: 1px solid black;
+}
+
+#recipients {
+}
+
 
 /* SENT MESSAGES */
 
@@ -36,6 +50,12 @@ h2 {
     margin-bottom: 10px;
     border: 1px solid black;
     height: 120px;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+
 }
     .sent_message .status {
         padding: 5px;
@@ -56,3 +76,20 @@ h2 {
         .sent_message .message_text {
             margin-top: 15px;
         }
+
+        /* STATUSES */
+        .queued, .sending {
+            border: 2px solid #757575;
+            background-color: #CCCCCC;
+        }
+
+        .failed {
+            border: 2px solid #CC0000;
+            background-color: #e7c5c5;
+        }
+
+        .sent {
+            border: 2px solid #008C00;
+            background-color: #bfe3bf; /* pale green */
+        }
+

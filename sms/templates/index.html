@@ -6,13 +6,29 @@
 
 <button id="test">Test!</button>
 
-<form id="sms_form" action="">
-    <p><label for="phone">Phone Number: </label>
-        <input type="text" name="phone_number" /></p>
-    <p><label for="phone_number">Message: </label>
-    <input type="text" name="message" />
-    <input type="submit" value="Send" /></p>
-</form>
+<h2>Select Recipients</h2>
+<div id="sms_box">
+    <table id="recipients">
+        <tr><td>test</td></tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.phone }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form id="new_user" action="">
+        Add user: 
+        <input type="text" name="user_name" placeholder="Name">
+        <input type="text" name="user_phone" placeholder="Phone">
+        <input type="submit" value="Add">
+    </form>
+    <form id="sms_form" action="">
+        <p><input type="text" name="phone_number" placeholder="Phone"></p>
+        <p><input type="text" name="message" placeholder="Message">
+            <input type="submit" value="Send"></p>
+    </form>
+</div>
 
 <div id="sent_message_list">
     <h2>Message History</h2>
