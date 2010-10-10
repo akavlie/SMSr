@@ -18,21 +18,30 @@ def index():
 def sms():
     """Send an SMS to Twilio and save response to DB. """
 
-    # Send to Twilio
-    tw_response = twilio_send(request.form['phone_number'], request.form['message'])
+    phone_numbers = request.form.getlist('user_phone')
+    # Defaults to 'Phone' with placeholder
+    if request.form['phone_number'] != 'Phone':
+        phone_numbers.append(request.form['phone_number'])
 
-    # Convert JSON from Twilio to Python dict
-    sms_data = json.loads(tw_response)
-    #sms_data = {'to': 1234567899, 'body': 'Fake SMS', 'status': 'fake'}
-    
-    # Commit to database
-    sms = SentMessage(sms_data['to'], sms_data['body'], sms_data['status'],
-                      sms_data['sid'], datetime.now())
-    db.session.add(sms)
+    template = ''
+
+    for p in phone_numbers:
+        # Send to Twilio
+        tw_response = twilio_send(p, request.form['message'])
+
+        # Convert JSON from Twilio to Python dict
+        sms_data = json.loads(tw_response)
+        #sms_data = {'to': 1234567899, 'body': 'Fake SMS', 'status': 'fake'}
+        
+        # Commit to database
+        sms = SentMessage(sms_data['to'], sms_data['body'], sms_data['status'],
+                          sms_data['sid'], datetime.now())
+        db.session.add(sms)
+        template += render_template('sent_message.html', sms=sms_data)
+
     db.session.commit()
 
-    # flash('SMS sent to %s' % request.form['phone_number'])
-    return render_template('sent_message.html', sms=sms_data)
+    return template
 
 @app.route('/sms/update/<sid>')
 def sms_update(sid):

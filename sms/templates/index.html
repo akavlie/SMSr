@@ -7,19 +7,21 @@
 <button id="test">Test!</button>
 
 <div id="sms_box" class="rounded">
-    <h3>Select Recipients</h3>
-    <table id="recipients">
-        {% for user in users %}
-        <tr>
-            <td><input type="checkbox" value="{{ user.id }}"></td>
-            <td>{{ user.first_name }} {{ user.last_name }}</td>
-            <td>{{ user.phone }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <form id="sms_form" action="">
-        <p>Other</p>
-        <p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>
+    <div id="recipients" class="rounded">
+        <h3>Select Recipients</h3>
+        <form id="sms_form" action="">
+        <table id="db_users">
+            {% for user in users %}
+            <tr>
+                <td><input type="checkbox" name="user_phone" value="{{ user.phone }}"></td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.phone }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+            <h3>Other</h3>
+            <p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>
+    </div>
         <p><input type="text" name="message" size="40" placeholder="Message">
             <input type="submit" value="Send"></p>
     </form>

@@ -30,15 +30,31 @@ $(function() {
     return false;
   });
 
-/*  $('#new_user').submit(function() {
-    $.post($SCRIPT_ROOT + '/user', $('#user_form').serialize() 
-      function(data) {
-      });
-    return false;
-  });
- */   
-  // Plugin for placeholder text
   $('input:text').placeholder();
+
+  // Highlight row for user when checked
+  $('#db_users input').click(function() {
+    if($(this).attr('checked')) {
+      $(this).closest('tr').addClass('highlight');
+    } else {
+      $(this).closest('tr').removeClass('highlight');
+    }
+  });
+
+  // Rows should remain highlighted after page refresh
+  $('#db_users input:checked').closest('tr').addClass('highlight');
+
+
+
+  // Not concerned with new user addition right now.
+  /*  $('#new_user').submit(function() {
+      $.post($SCRIPT_ROOT + '/user', $('#user_form').serialize() 
+        function(data) {
+        });
+      return false;
+    });
+   */   
+    // Plugin for placeholder text
 
 });
 
@@ -52,9 +68,8 @@ function checkStatus() {
     $(this).children('.status').load($SCRIPT_ROOT + '/sms/update/' + sid, function(data) {
       // Add class based on current status; remove former status class 
       if(data != status) {
-        $(this).parent()
-          .fadeOut()
-          .removeClass('queued sending')
+        $(this).parent().fadeOut();
+        $(this).parent().removeClass('queued sending')
           .addClass(data)
           .fadeIn();
       }

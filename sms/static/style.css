@@ -23,6 +23,7 @@ input.placeholder {
 
 .clear {clear: both;}
 .hidden {display: none;}
+.highlight {background-color: #FFFF99;}
 
 
 /* ROUNDED CORNERS */
@@ -55,12 +56,20 @@ input.placeholder {
     padding: 10px;
 }
 
+/* #CAE1FF steel blue - for recipients? */
+
 #recipients {
+    background-color: #CAE1FF;
+    padding: 10px;
+}
+
+#db_users {
     background-color: white;
     border: 1px solid black;
+    border-collapse: collapse;
 }
-    #recipients td {
-        padding: 2px 50px 2px 0px;
+    #db_users td {
+        padding: 5px 70px 5px 0px;
     }
 
 
@@ -105,12 +114,14 @@ input.placeholder {
 
         /* STATUSES */
         .queued, .sending {
-            border: 2px solid #757575;
-            background-color: #CCCCCC;
+            background-color: #CCCCCC; /* light gray */
         }
+            .queued .status, .sending .status {
+                background-color: #757575; /* gray */
+            }
 
         .failed {
-            background-color: #e7c5c5;
+            background-color: #e7c5c5; /* pink */
         }
             .failed .status {
                 background-color: #CC0000; /* red */
