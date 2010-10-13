@@ -16,6 +16,12 @@ h2 {
     border-bottom: 1px solid gray;
 }
 
+textarea {
+    font-family: sans-serif;
+    vertical-align: bottom;
+    margin: 0;
+}
+
 input.placeholder {
     color: #888;
     font-style: italic;
@@ -52,25 +58,32 @@ input.placeholder {
 /* SMS BOX */
 #sms_box {
     background-color: #EEEEEE;
-    border: 1px solid black;
     padding: 10px;
 }
 
-/* #CAE1FF steel blue - for recipients? */
+/*#db_users {*/
+    /*background-color: #CAE1FF;*/
+    /*padding: 10px;*/
+/*}*/
 
-#recipients {
-    background-color: #CAE1FF;
-    padding: 10px;
-}
-
-#db_users {
+#db_table {
     background-color: white;
     border: 1px solid black;
     border-collapse: collapse;
 }
-    #db_users td {
+    #db_table td {
         padding: 5px 70px 5px 0px;
     }
+
+/*#other_users {*/
+    /*background-color: #CAE1FF;*/
+    /*padding: 10px;*/
+/*}*/
+
+#message {
+    background-color: #CAE1FF;
+    padding: 45px 60px;
+}
 
 
 /* SMS FORM */

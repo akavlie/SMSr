@@ -30,7 +30,8 @@ $(function() {
     return false;
   });
 
-  $('input:text').placeholder();
+  // Plugin to enable placeholder text in form fields
+  $('input:text, textarea').placeholder();
 
   // Highlight row for user when checked
   $('#db_users input').click(function() {

@@ -4,13 +4,13 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='sms.js') }}"></script>
 
-<button id="test">Test!</button>
+<!--<button id="test">Test!</button>-->
 
 <div id="sms_box" class="rounded">
-    <div id="recipients" class="rounded">
+    <form id="sms_form" action="">
+    <div id="db_users" class="rounded">
         <h3>Select Recipients</h3>
-        <form id="sms_form" action="">
-        <table id="db_users">
+        <table id="db_table">
             {% for user in users %}
             <tr>
                 <td><input type="checkbox" name="user_phone" value="{{ user.phone }}"></td>
@@ -19,11 +19,15 @@
             </tr>
             {% endfor %}
         </table>
-            <h3>Other</h3>
-            <p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>
     </div>
-        <p><input type="text" name="message" size="40" placeholder="Message">
-            <input type="submit" value="Send"></p>
+    <div id="other_users" class="rounded">
+        <h3>Other</h3>
+        <p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>
+    </div>
+    <div id="message" class="rounded">
+        <textarea rows="2" cols="40" name="message" placeholder="Message"></textarea>
+        <input type="submit" value="Send">
+    </div>
     </form>
 </div>
 
