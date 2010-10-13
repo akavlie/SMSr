@@ -20,10 +20,10 @@
             {% endfor %}
         </table>
     </div>
-    <div id="other_users" class="rounded">
-        <h3>Other</h3>
-        <p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>
-    </div>
+    <!--<div id="other_users" class="rounded">-->
+        <!--<h3>Other</h3>-->
+        <!--<p><input type="text" name="phone_number" size="10" placeholder="Phone"></p>-->
+    <!--</div>-->
     <div id="message" class="rounded">
         <textarea rows="2" cols="40" name="message" placeholder="Message"></textarea>
         <input type="submit" value="Send">
@@ -34,16 +34,7 @@
 <div id="sent_message_list">
     <h2>Message History</h2>
     {% for message in sent_messages %}
-    <div class="sent_message rounded {{ message.status }}">
-        <div class="status rounded_top">{{ message.status }}</div>
-        <div class="sent_body">
-            <div class="phone">{{ message.phone }}</div>
-            <div class="time">{{ message.date }}</div>
-            <div class="clear"></div>
-            <div class="message_text"><p>{{ message.message }}</p></div>
-            <div class="sid hidden">{{ message.sid }}</div>
-        </div>
-    </div>
+    {% include 'sent_message.html' %}
     {% endfor %}
 </div>
 

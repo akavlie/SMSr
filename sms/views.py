@@ -1,16 +1,18 @@
+from datetime import datetime
 import json
 
 from sms import app
 from flask import render_template, request, redirect, url_for, flash
 from model import db, User, SentMessage, FrequentText
-from datetime import datetime
+from jinja2 import Environment
 
 from tw_send import twilio_send, twilio_update
+
 
 @app.route('/')
 def index():
     sent_messages = SentMessage.query.order_by(SentMessage.id.desc())[0:10]
-    users = User.query.all()
+    users = User.query.order_by(User.first_name).all()
     return render_template('index.html', sent_messages=sent_messages,
                            users=users)
 
@@ -19,9 +21,6 @@ def sms():
     """Send an SMS to Twilio and save response to DB. """
 
     phone_numbers = request.form.getlist('user_phone')
-    # Defaults to 'Phone' with placeholder
-    if request.form['phone_number'] != 'Phone':
-        phone_numbers.append(request.form['phone_number'])
 
     template = ''
 
@@ -37,7 +36,8 @@ def sms():
         sms = SentMessage(sms_data['to'], sms_data['body'], sms_data['status'],
                           sms_data['sid'], datetime.now())
         db.session.add(sms)
-        template += render_template('sent_message.html', sms=sms_data)
+        template += render_template('sent_message.html', message=sms,
+                                    extra_classes='new hidden')
 
     db.session.commit()
 

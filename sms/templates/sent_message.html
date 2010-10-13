@@ -1,10 +1,10 @@
-<div class="sent_message rounded new {{ sms.status }} hidden">
-            <div class="status rounded_top">{{ sms.status }}</div>
-            <div class="sent_body">
-                <div class="phone">{{ sms.to }}</div>
-                <div class="time">{{ sms.date_created }}</div>
-                <div class="clear"></div>
-                <div class="message_text"><p>{{ sms.body }}</p></div>
-                <div class="sid hidden">{{ sms.sid }}</div>
-            </div>
-        </div>
+<div class="sent_message rounded {{ extra_classes|default() }} {{ message.status }}">
+    <div class="status rounded_top">{{ message.status }}</div>
+    <div class="sent_body">
+        <div class="phone">{{ message.phone }}</div>
+        <div class="time">{{ message.date.strftime('%I:%M %p %m/%d') }}</div>
+        <div class="clear"></div>
+        <div class="message_text"><p>{{ message.message }}</p></div>
+        <div class="sid hidden">{{ message.sid }}</div>
+    </div>
+</div>

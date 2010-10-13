@@ -22,14 +22,14 @@ textarea {
     margin: 0;
 }
 
-input.placeholder {
+input.placeholder, textarea.placeholder {
     color: #888;
     font-style: italic;
 }
 
 .clear {clear: both;}
 .hidden {display: none;}
-.highlight {background-color: #FFFF99;}
+.highlight {background-color: #FFFFCC;}
 
 
 /* ROUNDED CORNERS */
@@ -61,10 +61,13 @@ input.placeholder {
     padding: 10px;
 }
 
-/*#db_users {*/
+#db_users {
     /*background-color: #CAE1FF;*/
-    /*padding: 10px;*/
-/*}*/
+    padding: 30px 60px 50px;
+}
+    #db_users h3 {
+        margin-top: 0;
+    }
 
 #db_table {
     background-color: white;
@@ -72,7 +75,7 @@ input.placeholder {
     border-collapse: collapse;
 }
     #db_table td {
-        padding: 5px 70px 5px 0px;
+        padding: 5px 70px 5px 10px;
     }
 
 /*#other_users {*/
@@ -102,15 +105,18 @@ input.placeholder {
 .sent_message {
     position: relative;
     margin-bottom: 10px;
-    height: 120px;
+    height: 130px;
 }
+    .sent_message p {
+        margin: 10px 0px;
+    }
     .sent_message .status {
         padding: 8px;
         color: white;
         font-weight: bold;
     }
     .sent_message .sent_body {
-        padding: 8px;
+        padding: 8px 12px;
     }
         .sent_message .phone {
             float: left;

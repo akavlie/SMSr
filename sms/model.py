@@ -25,7 +25,7 @@ class SentMessage(db.Model):
     __tablename__ = 'sent_messages'
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String)
-    date = db.Column(db.Date)
+    date = db.Column(db.DateTime)
     message = db.Column(db.String)
     status = db.Column(db.String)
     sid = db.Column(db.String)
