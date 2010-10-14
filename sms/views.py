@@ -22,11 +22,19 @@ def sms():
 
     phone_numbers = request.form.getlist('user_phone')
 
+    e = Environment()
     template = ''
 
     for p in phone_numbers:
+
+        # Render Jinja2 template from message
+        u = User.query.filter(User.phone == p).one()
+        msg_template = e.from_string(request.form['message'])
+        message = msg_template.render(first_name=u.first_name,
+                                      last_name=u.last_name, phone=p)
+
         # Send to Twilio
-        tw_response = twilio_send(p, request.form['message'])
+        tw_response = twilio_send(p, message)
 
         # Convert JSON from Twilio to Python dict
         sms_data = json.loads(tw_response)
@@ -36,8 +44,7 @@ def sms():
         sms = SentMessage(sms_data['to'], sms_data['body'], sms_data['status'],
                           sms_data['sid'], datetime.now())
         db.session.add(sms)
-        template += render_template('sent_message.html', message=sms,
-                                    extra_classes='new hidden')
+        template += render_template('new_message.html', message=sms)
 
     db.session.commit()
 

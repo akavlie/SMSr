@@ -10,7 +10,7 @@ $(function() {
     });
   // SMS SUBMISION
   // -------------
-  $("#sms_form").submit(function() {
+  $('#sms_form').submit(function() {
     // Post form data via AJAX
     $.post($SCRIPT_ROOT + "/sms", $("#sms_form").serialize(),
       function(data) {
@@ -27,6 +27,7 @@ $(function() {
             status_checker = setInterval('checkStatus()', 5000);
         }
     });
+    //$('#sms_form')[0].reset();
     return false;
   });
 
@@ -69,10 +70,11 @@ function checkStatus() {
     $(this).children('.status').load($SCRIPT_ROOT + '/sms/update/' + sid, function(data) {
       // Add class based on current status; remove former status class 
       if(data != status) {
-        $(this).parent().fadeOut();
+        // Hide, change class, then fade in, to call attention to status changes
+        $(this).parent().hide();
         $(this).parent().removeClass('queued sending')
           .addClass(data)
-          .fadeIn();
+          .fadeIn(1000);
       }
         //.children('.sent_message, .status').effect('highlight', {color: '#ffffff'}, 3000);
     });

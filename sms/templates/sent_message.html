@@ -1,4 +1,4 @@
-<div class="sent_message rounded {{ extra_classes|default() }} {{ message.status }}">
+<div class="sent_message rounded {% block class %}{% endblock %} {{ message.status }}">
     <div class="status rounded_top">{{ message.status }}</div>
     <div class="sent_body">
         <div class="phone">{{ message.phone }}</div>
