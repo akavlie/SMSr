@@ -1,0 +1,14 @@
+import os
+
+# Flask config
+SECRET_KEY = 'change-me'
+
+# Database
+SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/sms.db'
+
+# Twilio account
+API_VERSION = '2010-04-01'
+ACCOUNT_SID = ''
+ACCOUNT_TOKEN = ''
+CALLER_ID = ''
+
